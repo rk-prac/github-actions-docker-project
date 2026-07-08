@@ -3,7 +3,7 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
-def home()
+def home():
     return "Version 2: CI/CD pipeline practice successful!"
 
 if __name__ == "__main__":
