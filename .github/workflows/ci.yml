@@ -1,31 +1,31 @@
-name: Docker CI Pipeline
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
-  build:
+
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show files
-        run: ls -la
-
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-      
+
       - name: Check Python syntax
         run: python -m py_compile app.py
+
+  docker:
+    needs: test
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -33,12 +33,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Docker image with version tag
+      - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo:${{ github.sha }} .
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo:latest .
 
-      - name: Push Docker image with version tag
+      - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo:latest
