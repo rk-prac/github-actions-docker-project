@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-actions-demo-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: github-actions-demo
+  template:
+    metadata:
+      labels:
+        app: github-actions-demo
+    spec:
+      containers:
+        - name: github-actions-demo-container
+          image: rkataria7610/github-actions-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_MESSAGE
+              valueFrom:
+               configMapKeyRef:
+                name: github-actions-demo-config
+                key: APP_MESSAGE
