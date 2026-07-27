@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: github-actions-demo-container
-          image: rkataria7610/github-actions-demo:f9bf8e8001287e7f5dcdb8324eb2d986e1a0ed12
+          image: rkataria7610/github-actions-demo:38a1b699e44b62049a5f46e17862c3a005c24b94
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
