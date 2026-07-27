@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: github-actions-demo-container
-          image: rkataria7610/github-actions-demo:latest
+          image: rkataria7610/github-actions-demo:f9bf8e8001287e7f5dcdb8324eb2d986e1a0ed12
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -24,3 +24,8 @@ spec:
                configMapKeyRef:
                 name: github-actions-demo-config
                 key: APP_MESSAGE
+            - name: DB_PASSWORD
+              valueFrom:
+               secretKeyRef:
+                name: github-actions-demo-secret
+                key: DB_PASSWORD   
