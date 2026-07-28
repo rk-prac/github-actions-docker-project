@@ -150,5 +150,29 @@ This project demonstrates practical experience with:
 - Kubernetes troubleshooting (`CreateContainerConfigError`)
 - Rolling updates using Deployments
 
+## Screenshots
+
+### GitHub Actions Pipeline
+
+![GitHub Actions](images/github-actions-success.png)
+
+---
+
+### Docker Hub Image
+
+![Docker Hub](images/dockerhub-tags.png)
+
+---
+
+### Kubernetes Pods
+
+![Kubernetes Pods](images/kubernetes-pods.png)
+
+---
+
+### Running Application
+
+![Application](images/application-running.png)
+
 
 
